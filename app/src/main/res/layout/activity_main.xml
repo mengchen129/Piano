@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.mengchen.piano.MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="MengChen Piano for Android"
+            android:textSize="20dp"
+            android:textAlignment="center"
+            android:paddingTop="10dp" />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tunes"
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="C"
+                android:id="@+id/tC_btn"
+                android:checked="true"
+                />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="C#"
+                android:id="@+id/tCp_btn"
+                android:checked="false"
+                />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="D"
+                android:id="@+id/tD_btn"
+                android:checked="false"
+                 />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="D#"
+                android:id="@+id/tDp_btn"
+                android:checked="false"
+                 />
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="E"
+                android:id="@+id/tE_btn"
+                android:checked="false"
+                 />
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="F"
+                android:id="@+id/tF_btn"
+                android:checked="false"
+                 />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="F#"
+                android:id="@+id/tFp_btn"
+                android:checked="false"
+                 />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="G"
+                android:id="@+id/tG_btn"
+                android:checked="false"
+                />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="G#"
+                android:id="@+id/tGp_btn"
+                android:checked="false"
+                />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="A"
+                android:id="@+id/tA_btn"
+                android:checked="false"
+                />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="A#"
+                android:id="@+id/tAp_btn"
+                android:checked="false"
+                />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="B"
+                android:id="@+id/tB_btn"
+                android:checked="false"
+                />
+        </RadioGroup>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="录音"
+                android:id="@+id/record_btn"
+                />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="播放"
+                android:id="@+id/play_btn"
+                />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="保存"
+                android:id="@+id/save_btn"
+                />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="分享"
+                android:id="@+id/share_btn"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="5"
+                android:id="@+id/s35_btn"
+                android:minWidth="40dp"
+                android:textColor="#008800"
+                android:gravity="bottom"
+                android:textAlignment="center"
+                android:backgroundTint="@color/btnColorDefault"
+                />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="6"
+                android:id="@+id/s37_btn"
+                android:minWidth="40dp"
+                android:textColor="#008800"
+                android:gravity="bottom"
+                android:textAlignment="center"
+                android:backgroundTint="@color/btnColorDefault"
+
+                />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="7"
+                android:id="@+id/s39_btn"
+                android:minWidth="40dp"
+                android:textColor="#008800"
+                android:gravity="bottom"
+                android:textAlignment="center"
+                android:backgroundTint="@color/btnColorDefault"
+
+                />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="1"
+                android:id="@+id/s40_btn"
+                android:minWidth="40dp"
+                android:textColor="#0088ff"
+                android:gravity="bottom"
+                android:textAlignment="center"
+                android:backgroundTint="@color/btnColorDefault"
+
+                />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="2"
+                android:id="@+id/s42_btn"
+                android:minWidth="40dp"
+                android:textColor="#0088ff"
+                android:gravity="bottom"
+                android:textAlignment="center"
+                android:backgroundTint="@color/btnColorDefault"
+
+                />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="3"
+                android:id="@+id/s44_btn"
+                android:minWidth="40dp"
+                android:textColor="#0088ff"
+                android:gravity="bottom"
+                android:textAlignment="center"
+                android:backgroundTint="@color/btnColorDefault"
+
+                />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="4"
+                android:id="@+id/s45_btn"
+                android:minWidth="40dp"
+                android:textColor="#0088ff"
+                android:gravity="bottom"
+                android:textAlignment="center"
+                android:backgroundTint="@color/btnColorDefault"
+
+                />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="5"
+                android:id="@+id/s47_btn"
+                android:minWidth="40dp"
+                android:textColor="#0088ff"
+                android:gravity="bottom"
+                android:textAlignment="center"
+                android:backgroundTint="@color/btnColorDefault"
+
+                />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="6"
+                android:id="@+id/s49_btn"
+                android:minWidth="40dp"
+                android:textColor="#0088ff"
+                android:gravity="bottom"
+                android:textAlignment="center"
+                android:backgroundTint="@color/btnColorDefault"
+
+                />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="7"
+                android:id="@+id/s51_btn"
+                android:minWidth="40dp"
+                android:textColor="#0088ff"
+                android:gravity="bottom"
+                android:textAlignment="center"
+                android:backgroundTint="@color/btnColorDefault"
+
+                />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="1"
+                android:id="@+id/s52_btn"
+                android:minWidth="40dp"
+                android:textColor="#880088"
+                android:gravity="bottom"
+                android:textAlignment="center"
+                android:backgroundTint="@color/btnColorDefault"
+
+                />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="2"
+                android:id="@+id/s54_btn"
+                android:minWidth="40dp"
+                android:textColor="#880088"
+                android:gravity="bottom"
+                android:textAlignment="center"
+                android:backgroundTint="@color/btnColorDefault"
+
+                />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="3"
+                android:id="@+id/s56_btn"
+                android:minWidth="40dp"
+                android:textColor="#880088"
+                android:gravity="bottom"
+                android:textAlignment="center"
+                android:backgroundTint="@color/btnColorDefault"
+
+                />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="4"
+                android:id="@+id/s57_btn"
+                android:minWidth="40dp"
+                android:textColor="#880088"
+                android:gravity="bottom"
+                android:textAlignment="center"
+                android:backgroundTint="@color/btnColorDefault"
+
+                />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="5"
+                android:id="@+id/s59_btn"
+                android:minWidth="40dp"
+                android:textColor="#880088"
+                android:gravity="bottom"
+                android:textAlignment="center"
+                android:backgroundTint="@color/btnColorDefault"
+
+                />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="6"
+                android:id="@+id/s61_btn"
+                android:minWidth="40dp"
+                android:textColor="#880088"
+                android:gravity="bottom"
+                android:textAlignment="center"
+                android:backgroundTint="@color/btnColorDefault"
+
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+
+</RelativeLayout>
