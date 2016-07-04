@@ -20,4 +20,8 @@ public class RecordInfo {
     public View getButton() {
         return button;
     }
+
+    public String toString() {
+        return "{tunes=" + this.tunes + "}";
+    }
 }

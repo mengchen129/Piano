@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">钢琴王子</string>
+    <string name="title_activity_web_view">WebViewActivity</string>
+
+    <string name="url_upload_page">http://182.92.167.237:9527/upload-page</string>
+    <string name="url_list_page">http://182.92.167.237:9527/list-page</string>
 </resources>

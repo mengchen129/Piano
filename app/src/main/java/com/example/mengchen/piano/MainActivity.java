@@ -1,6 +1,7 @@
 package com.example.mengchen.piano;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.media.AudioManager;
 import android.media.SoundPool;
@@ -14,6 +15,9 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -181,12 +185,6 @@ public class MainActivity extends Activity {
         tunesSoundMap.put(71, s71);
         tunesSoundMap.put(72, s72);
 
-
-        /*GradientDrawable drawable = new GradientDrawable();
-        drawable.setShape(GradientDrawable.RECTANGLE); // 画框
-        drawable.setStroke(1, Color.BLUE); // 边框粗细及颜色
-        drawable.setColor(0xEEEEEE); // 边框内部颜色*/
-
         Button s35Btn = (Button) this.findViewById(R.id.s35_btn);
         Button s37Btn = (Button) this.findViewById(R.id.s37_btn);
         Button s39Btn = (Button) this.findViewById(R.id.s39_btn);
@@ -297,6 +295,8 @@ public class MainActivity extends Activity {
                 if (isRecording) {
                     isRecording = false;
                     recordBtn.setText("录音");
+
+                    // 录音结束时存储一个空的RecordInfo，用于标识结束
                     long timestamp = (System.currentTimeMillis() - recordStartTime) / RECORD_INTERVAL;
                     timeTunesMap.put(timestamp, Arrays.asList(new RecordInfo[0]));
 
@@ -316,7 +316,15 @@ public class MainActivity extends Activity {
             @Override
             public void handleMessage(Message msg) {
                 if (msg.what == 1) {
-                    final Button btn = (Button) msg.obj;
+                    final Button btn;
+
+                    if (msg.obj != null) {
+                        btn = (Button) msg.obj;
+                    } else {
+                        int tunes = msg.arg1;
+                        btn = (Button) findViewById(getResources().getIdentifier("s" + tunes + "_btn", "id", "com.example.mengchen.piano"));
+                    }
+
                     btn.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.btnColorActive)));
                     new Handler().postDelayed(new Runnable() {
                         @Override
@@ -359,6 +367,7 @@ public class MainActivity extends Activity {
                             if (timeTunesMap.containsKey(currentTick)) {
                                 List<RecordInfo> recordInfoList = timeTunesMap.get(currentTick);
 
+                                // 结束标记
                                 if (recordInfoList.isEmpty()) {
                                     playTimer.cancel();
                                     Message playEndMessage = new Message();
@@ -370,63 +379,52 @@ public class MainActivity extends Activity {
                                     playSound(recordInfo.getTunes(), null, null);
                                     Message message = new Message();
                                     message.what = 1;
+                                    message.arg1 = recordInfo.getTunes();
                                     message.obj = recordInfo.getButton();
                                     handler.sendMessage(message);
                                 }
-                                /*if (playCount.incrementAndGet() >= timeTunesMap.size()) {
-                                    playTimer.cancel();
-                                    Message playEndMessage = new Message();
-                                    playEndMessage.what = 2;
-                                    handler.sendMessage(playEndMessage);
-                                }*/
                             }
                         }
                     }, 0, RECORD_INTERVAL);
-
-
-//                    for (Map.Entry<Long, RecordInfo> entry : timeTunesMap.entrySet()) {
-//                        long delay = entry.getKey() * RECORD_INTERVAL;
-//                        final RecordInfo recordInfo = entry.getValue();
-//                        final Timer timer = new Timer();
-//                        timer.schedule(new TimerTask() {
-//                            @Override
-//                            public void run() {
-//                                playSound(recordInfo.getTunes(), null, null);
-//                                Message message = new Message();
-//                                message.what = 1;
-//                                message.obj = recordInfo.getButton();
-//                                handler.sendMessage(message);
-//
-//                                playTaskList.remove(timer);
-//                                if (playTaskList.isEmpty()) {
-//                                    Message playEndMessage = new Message();
-//                                    playEndMessage.what = 2;
-//                                    handler.sendMessage(playEndMessage);
-//                                }
-//                            }
-//                        }, delay);
-//
-//                        playTaskList.add(timer);
-//                    }
                 }
             }
         });
 
-        Button saveBtn = (Button) this.findViewById(R.id.save_btn);
-        saveBtn.setOnClickListener(new View.OnClickListener() {
+        Button uploadBtn = (Button) this.findViewById(R.id.upload_btn);
+        uploadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "正在开发，敬请期待！", Toast.LENGTH_SHORT).show();
+                if (isRecording) {
+                    Toast.makeText(MainActivity.this, "正在录音呢, 别急哦~", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (timeTunesMap.isEmpty()) {
+                    Toast.makeText(MainActivity.this, "你好像没有录音呢，录音完成后再上传吧~", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this, WebviewActivity.class);
+                intent.putExtra("url", getString(R.string.url_upload_page));
+                String recordJson = RecordInfoUtils.toJSON(timeTunesMap);
+                intent.putExtra("recordJson", recordJson);
+                startActivityForResult(intent, 1);
+
             }
         });
 
-        Button shareBtn = (Button) this.findViewById(R.id.share_btn);
-        shareBtn.setOnClickListener(new View.OnClickListener() {
+        Button exploreBtn = (Button) this.findViewById(R.id.explore_btn);
+        exploreBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "正在开发，敬请期待！", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this, WebviewActivity.class);
+                intent.putExtra("url", getString(R.string.url_list_page));
+                startActivityForResult(intent, 1);
             }
         });
+
+
     }
 
     @Override
@@ -435,6 +433,47 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         SysApplication.getInstance().addActivity(this);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (data == null) return;
+        String recordJson = data.getExtras().getString("recordJson");
+        if (recordJson != null) {
+            timeTunesMap.clear();
+
+            try {
+                JSONArray ja = new JSONArray(recordJson);
+
+                for (int i = 0; i < ja.length(); i++) {
+                    JSONObject jo = ja.getJSONObject(i);
+
+                    long time = jo.getInt("time");
+                    JSONArray tunesArr = jo.getJSONArray("tunes");
+
+                    List<RecordInfo> recordInfoList = new ArrayList<>();
+
+                    for (int j = 0; j < tunesArr.length(); j++) {
+                        int tune = tunesArr.getInt(j);
+                        recordInfoList.add(new RecordInfo(tune, null));
+                    }
+
+                    timeTunesMap.put(time, recordInfoList);
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+//            Toast.makeText(MainActivity.this, timeTunesMap.toString(), Toast.LENGTH_LONG).show();
+            final Button playBtn = (Button) this.findViewById(R.id.play_btn);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    playBtn.performClick();
+                }
+            }, 1000);
+        }
     }
 
     private boolean playSound(int id, MotionEvent motionEvent, View view) {

@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.mengchen.piano">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/piano"
@@ -10,18 +12,19 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="landscape"
-            >
-        </activity>
-        <activity android:name=".HelloActivity"
-            android:screenOrientation="portrait"
-            >
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".HelloActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".WebviewActivity" android:screenOrientation="portrait"/>
+
+
     </application>
 
 </manifest>
