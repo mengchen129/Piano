@@ -23,6 +23,7 @@ public class WebviewActivity extends Activity {
         Intent intent = getIntent();
         String url = intent.getStringExtra("url");
         final String recordJson = intent.getStringExtra("recordJson");
+        final String recordTune = intent.getStringExtra("recordTune");
 
 
         webview.setWebViewClient(new WebViewClient() {
@@ -35,7 +36,7 @@ public class WebviewActivity extends Activity {
             @Override
             public void onPageFinished(WebView view, String url) {
                 if (recordJson != null) {
-                    webview.loadUrl("javascript:getRecordInfo('" + recordJson + "')");
+                    webview.loadUrl("javascript:getRecordInfo('" + recordJson + "', '" + recordTune + "')");
                 }
                 super.onPageFinished(view, url);
             }

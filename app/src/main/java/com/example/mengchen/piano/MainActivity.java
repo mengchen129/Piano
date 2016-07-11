@@ -297,6 +297,9 @@ public class MainActivity extends Activity {
                     recordBtn.setText("录音");
 
                     // 录音结束时存储一个空的RecordInfo，用于标识结束
+                    // 如果没有任何按键，则不存储该标识
+                    if (timeTunesMap.isEmpty()) return;
+
                     long timestamp = (System.currentTimeMillis() - recordStartTime) / RECORD_INTERVAL;
                     timeTunesMap.put(timestamp, Arrays.asList(new RecordInfo[0]));
 
@@ -358,7 +361,6 @@ public class MainActivity extends Activity {
                     playBtn.setText("停止播放");
 
                     final AtomicLong playTick = new AtomicLong(0);
-                    final AtomicInteger playCount = new AtomicInteger(0);
                     playTimer = new Timer();
                     playTimer.schedule(new TimerTask() {
                         @Override
@@ -408,6 +410,7 @@ public class MainActivity extends Activity {
                 intent.putExtra("url", getString(R.string.url_upload_page));
                 String recordJson = RecordInfoUtils.toJSON(timeTunesMap);
                 intent.putExtra("recordJson", recordJson);
+                intent.putExtra("recordTune", String.valueOf(tunesAdd));
                 startActivityForResult(intent, 1);
 
             }
