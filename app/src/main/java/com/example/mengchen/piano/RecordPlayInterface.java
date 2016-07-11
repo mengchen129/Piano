@@ -13,9 +13,10 @@ public class RecordPlayInterface {
     }
 
     @JavascriptInterface
-    public void play(String recordInfo) {
+    public void play(String recordInfo, String tune) {
         Intent intent = new Intent();
         intent.putExtra("recordJson", recordInfo);
+        intent.putExtra("recordTune", tune);
         context.setResult(1, intent);
         context.finish();
     }

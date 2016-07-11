@@ -34,7 +34,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="C"
-                android:id="@+id/tC_btn"
+                android:id="@+id/t0_btn"
                 android:checked="true"
                 />
 
@@ -42,7 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="C#"
-                android:id="@+id/tCp_btn"
+                android:id="@+id/t1_btn"
                 android:checked="false"
                 />
 
@@ -50,7 +50,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="D"
-                android:id="@+id/tD_btn"
+                android:id="@+id/t2_btn"
                 android:checked="false"
                  />
 
@@ -58,21 +58,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="D#"
-                android:id="@+id/tDp_btn"
+                android:id="@+id/t3_btn"
                 android:checked="false"
                  />
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="E"
-                android:id="@+id/tE_btn"
+                android:id="@+id/t4_btn"
                 android:checked="false"
                  />
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="F"
-                android:id="@+id/tF_btn"
+                android:id="@+id/t5_btn"
                 android:checked="false"
                  />
 
@@ -80,7 +80,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="F#"
-                android:id="@+id/tFp_btn"
+                android:id="@+id/t6_btn"
                 android:checked="false"
                  />
 
@@ -88,7 +88,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="G"
-                android:id="@+id/tG_btn"
+                android:id="@+id/t7_btn"
                 android:checked="false"
                 />
 
@@ -96,7 +96,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="G#"
-                android:id="@+id/tGp_btn"
+                android:id="@+id/t8_btn"
                 android:checked="false"
                 />
 
@@ -104,7 +104,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="A"
-                android:id="@+id/tA_btn"
+                android:id="@+id/t9_btn"
                 android:checked="false"
                 />
 
@@ -112,7 +112,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="A#"
-                android:id="@+id/tAp_btn"
+                android:id="@+id/t10_btn"
                 android:checked="false"
                 />
 
@@ -120,7 +120,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="B"
-                android:id="@+id/tB_btn"
+                android:id="@+id/t11_btn"
                 android:checked="false"
                 />
         </RadioGroup>

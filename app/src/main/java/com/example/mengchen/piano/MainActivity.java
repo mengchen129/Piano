@@ -26,7 +26,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class MainActivity extends Activity {
@@ -65,18 +64,18 @@ public class MainActivity extends Activity {
 
         RadioGroup tunes = (RadioGroup) this.findViewById(R.id.tunes);
 
-        final RadioButton tC = (RadioButton) this.findViewById(R.id.tC_btn);
-        final RadioButton tCp = (RadioButton) this.findViewById(R.id.tCp_btn);
-        final RadioButton tD = (RadioButton) this.findViewById(R.id.tD_btn);
-        final RadioButton tDp = (RadioButton) this.findViewById(R.id.tDp_btn);
-        final RadioButton tE = (RadioButton) this.findViewById(R.id.tE_btn);
-        final RadioButton tF = (RadioButton) this.findViewById(R.id.tF_btn);
-        final RadioButton tFp = (RadioButton) this.findViewById(R.id.tFp_btn);
-        final RadioButton tG = (RadioButton) this.findViewById(R.id.tG_btn);
-        final RadioButton tGp = (RadioButton) this.findViewById(R.id.tGp_btn);
-        final RadioButton tA = (RadioButton) this.findViewById(R.id.tA_btn);
-        final RadioButton tAp = (RadioButton) this.findViewById(R.id.tAp_btn);
-        final RadioButton tB = (RadioButton) this.findViewById(R.id.tB_btn);
+        final RadioButton tC = (RadioButton) this.findViewById(R.id.t0_btn);
+        final RadioButton tCp = (RadioButton) this.findViewById(R.id.t1_btn);
+        final RadioButton tD = (RadioButton) this.findViewById(R.id.t2_btn);
+        final RadioButton tDp = (RadioButton) this.findViewById(R.id.t3_btn);
+        final RadioButton tE = (RadioButton) this.findViewById(R.id.t4_btn);
+        final RadioButton tF = (RadioButton) this.findViewById(R.id.t5_btn);
+        final RadioButton tFp = (RadioButton) this.findViewById(R.id.t6_btn);
+        final RadioButton tG = (RadioButton) this.findViewById(R.id.t7_btn);
+        final RadioButton tGp = (RadioButton) this.findViewById(R.id.t8_btn);
+        final RadioButton tA = (RadioButton) this.findViewById(R.id.t9_btn);
+        final RadioButton tAp = (RadioButton) this.findViewById(R.id.t10_btn);
+        final RadioButton tB = (RadioButton) this.findViewById(R.id.t11_btn);
 
         tunesDiffMap.put(tC.getId(), 0);
         tunesDiffMap.put(tCp.getId(), 1);
@@ -427,7 +426,6 @@ public class MainActivity extends Activity {
             }
         });
 
-
     }
 
     @Override
@@ -441,7 +439,9 @@ public class MainActivity extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (data == null) return;
-        String recordJson = data.getExtras().getString("recordJson");
+        Bundle extras = data.getExtras();
+        String recordJson = extras.getString("recordJson");
+        final String recordTune = extras.getString("recordTune");
         if (recordJson != null) {
             timeTunesMap.clear();
 
@@ -468,11 +468,16 @@ public class MainActivity extends Activity {
                 e.printStackTrace();
             }
 
+
+
 //            Toast.makeText(MainActivity.this, timeTunesMap.toString(), Toast.LENGTH_LONG).show();
             final Button playBtn = (Button) this.findViewById(R.id.play_btn);
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
+                    RadioButton tuneRadio = (RadioButton) findViewById(getResources().getIdentifier("t" + recordTune + "_btn", "id", "com.example.mengchen.piano"));
+                    tuneRadio.performClick();
+                    Toast.makeText(MainActivity.this, "已自动切换到音调 " + tuneRadio.getText() + " 播放", Toast.LENGTH_SHORT).show();
                     playBtn.performClick();
                 }
             }, 1000);
