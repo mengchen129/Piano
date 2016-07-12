@@ -1,6 +1,7 @@
 package com.example.mengchen.piano;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.media.AudioManager;
@@ -8,6 +9,7 @@ import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.PowerManager;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -29,6 +31,9 @@ import java.util.TimerTask;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class MainActivity extends Activity {
+
+    PowerManager powerManager = null;
+    PowerManager.WakeLock wakeLock = null;
 
     private Map<Integer, Integer> tunesSoundMap = new HashMap<Integer, Integer>();
     private Map<Integer, Integer> tunesDiffMap = new HashMap<Integer, Integer>();
@@ -99,90 +104,103 @@ public class MainActivity extends Activity {
 
 
         soundPool = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
-        final int s35 = soundPool.load(this, R.raw.s35, 1);     // 5
-        final int s36 = soundPool.load(this, R.raw.s36, 1);
-        final int s37 = soundPool.load(this, R.raw.s37, 1);
-        final int s38 = soundPool.load(this, R.raw.s38, 1);
-        final int s39 = soundPool.load(this, R.raw.s39, 1);
 
-        final int s40 = soundPool.load(this, R.raw.s40, 1);     // 1
-        final int s41 = soundPool.load(this, R.raw.s41, 1);
-        final int s42 = soundPool.load(this, R.raw.s42, 1);
-        final int s43 = soundPool.load(this, R.raw.s43, 1);
-        final int s44 = soundPool.load(this, R.raw.s44, 1);
-        final int s45 = soundPool.load(this, R.raw.s45, 1);
-        final int s46 = soundPool.load(this, R.raw.s46, 1);
-        final int s47 = soundPool.load(this, R.raw.s47, 1);
-        final int s48 = soundPool.load(this, R.raw.s48, 1);
-        final int s49 = soundPool.load(this, R.raw.s49, 1);
-        final int s50 = soundPool.load(this, R.raw.s50, 1);
-        final int s51 = soundPool.load(this, R.raw.s51, 1);
+        final Context context = MainActivity.this;
 
-        final int s52 = soundPool.load(this, R.raw.s52, 1);     // 1
-        final int s53 = soundPool.load(this, R.raw.s53, 1);
-        final int s54 = soundPool.load(this, R.raw.s54, 1);     // 2
-        final int s55 = soundPool.load(this, R.raw.s55, 1);
-        final int s56 = soundPool.load(this, R.raw.s56, 1);     // 3
-        final int s57 = soundPool.load(this, R.raw.s57, 1);     // 4
-        final int s58 = soundPool.load(this, R.raw.s58, 1);
-        final int s59 = soundPool.load(this, R.raw.s59, 1);     // 5
+        /**
+         * 将声音资源异步加载，不阻塞UI线程
+         */
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                final int s35 = soundPool.load(context, R.raw.s35, 1);     // 5
+                final int s36 = soundPool.load(context, R.raw.s36, 1);
+                final int s37 = soundPool.load(context, R.raw.s37, 1);
+                final int s38 = soundPool.load(context, R.raw.s38, 1);
+                final int s39 = soundPool.load(context, R.raw.s39, 1);
 
-        final int s60 = soundPool.load(this, R.raw.s60, 1);
-        final int s61 = soundPool.load(this, R.raw.s61, 1);
-        final int s62 = soundPool.load(this, R.raw.s62, 1);
-        final int s63 = soundPool.load(this, R.raw.s63, 1);
-        final int s64 = soundPool.load(this, R.raw.s64, 1);
-        final int s65 = soundPool.load(this, R.raw.s65, 1);
-        final int s66 = soundPool.load(this, R.raw.s66, 1);
-        final int s67 = soundPool.load(this, R.raw.s67, 1);
-        final int s68 = soundPool.load(this, R.raw.s68, 1);
-        final int s69 = soundPool.load(this, R.raw.s69, 1);
-        final int s70 = soundPool.load(this, R.raw.s70, 1);
-        final int s71 = soundPool.load(this, R.raw.s71, 1);
-        final int s72 = soundPool.load(this, R.raw.s72, 1);
+                final int s40 = soundPool.load(context, R.raw.s40, 1);     // 1
+                final int s41 = soundPool.load(context, R.raw.s41, 1);
+                final int s42 = soundPool.load(context, R.raw.s42, 1);
+                final int s43 = soundPool.load(context, R.raw.s43, 1);
+                final int s44 = soundPool.load(context, R.raw.s44, 1);
+                final int s45 = soundPool.load(context, R.raw.s45, 1);
+                final int s46 = soundPool.load(context, R.raw.s46, 1);
+                final int s47 = soundPool.load(context, R.raw.s47, 1);
+                final int s48 = soundPool.load(context, R.raw.s48, 1);
+                final int s49 = soundPool.load(context, R.raw.s49, 1);
+                final int s50 = soundPool.load(context, R.raw.s50, 1);
+                final int s51 = soundPool.load(context, R.raw.s51, 1);
+
+                final int s52 = soundPool.load(context, R.raw.s52, 1);     // 1
+                final int s53 = soundPool.load(context, R.raw.s53, 1);
+                final int s54 = soundPool.load(context, R.raw.s54, 1);     // 2
+                final int s55 = soundPool.load(context, R.raw.s55, 1);
+                final int s56 = soundPool.load(context, R.raw.s56, 1);     // 3
+                final int s57 = soundPool.load(context, R.raw.s57, 1);     // 4
+                final int s58 = soundPool.load(context, R.raw.s58, 1);
+                final int s59 = soundPool.load(context, R.raw.s59, 1);     // 5
+
+                final int s60 = soundPool.load(context, R.raw.s60, 1);
+                final int s61 = soundPool.load(context, R.raw.s61, 1);
+                final int s62 = soundPool.load(context, R.raw.s62, 1);
+                final int s63 = soundPool.load(context, R.raw.s63, 1);
+                final int s64 = soundPool.load(context, R.raw.s64, 1);
+                final int s65 = soundPool.load(context, R.raw.s65, 1);
+                final int s66 = soundPool.load(context, R.raw.s66, 1);
+                final int s67 = soundPool.load(context, R.raw.s67, 1);
+                final int s68 = soundPool.load(context, R.raw.s68, 1);
+                final int s69 = soundPool.load(context, R.raw.s69, 1);
+                final int s70 = soundPool.load(context, R.raw.s70, 1);
+                final int s71 = soundPool.load(context, R.raw.s71, 1);
+                final int s72 = soundPool.load(context, R.raw.s72, 1);
 
 
-        tunesSoundMap.put(35, s35);
-        tunesSoundMap.put(36, s36);
-        tunesSoundMap.put(37, s37);
-        tunesSoundMap.put(38, s38);
-        tunesSoundMap.put(39, s39);
+                tunesSoundMap.put(35, s35);
+                tunesSoundMap.put(36, s36);
+                tunesSoundMap.put(37, s37);
+                tunesSoundMap.put(38, s38);
+                tunesSoundMap.put(39, s39);
 
-        tunesSoundMap.put(40, s40);
-        tunesSoundMap.put(41, s41);
-        tunesSoundMap.put(42, s42);
-        tunesSoundMap.put(43, s43);
-        tunesSoundMap.put(44, s44);
-        tunesSoundMap.put(45, s45);
-        tunesSoundMap.put(46, s46);
-        tunesSoundMap.put(47, s47);
-        tunesSoundMap.put(48, s48);
-        tunesSoundMap.put(49, s49);
-        tunesSoundMap.put(50, s50);
-        tunesSoundMap.put(51, s51);
+                tunesSoundMap.put(40, s40);
+                tunesSoundMap.put(41, s41);
+                tunesSoundMap.put(42, s42);
+                tunesSoundMap.put(43, s43);
+                tunesSoundMap.put(44, s44);
+                tunesSoundMap.put(45, s45);
+                tunesSoundMap.put(46, s46);
+                tunesSoundMap.put(47, s47);
+                tunesSoundMap.put(48, s48);
+                tunesSoundMap.put(49, s49);
+                tunesSoundMap.put(50, s50);
+                tunesSoundMap.put(51, s51);
 
-        tunesSoundMap.put(52, s52);
-        tunesSoundMap.put(53, s53);
-        tunesSoundMap.put(54, s54);
-        tunesSoundMap.put(55, s55);
-        tunesSoundMap.put(56, s56);
-        tunesSoundMap.put(57, s57);
-        tunesSoundMap.put(58, s58);
-        tunesSoundMap.put(59, s59);
+                tunesSoundMap.put(52, s52);
+                tunesSoundMap.put(53, s53);
+                tunesSoundMap.put(54, s54);
+                tunesSoundMap.put(55, s55);
+                tunesSoundMap.put(56, s56);
+                tunesSoundMap.put(57, s57);
+                tunesSoundMap.put(58, s58);
+                tunesSoundMap.put(59, s59);
 
-        tunesSoundMap.put(60, s60);
-        tunesSoundMap.put(61, s61);
-        tunesSoundMap.put(62, s62);
-        tunesSoundMap.put(63, s63);
-        tunesSoundMap.put(64, s64);
-        tunesSoundMap.put(65, s65);
-        tunesSoundMap.put(66, s66);
-        tunesSoundMap.put(67, s67);
-        tunesSoundMap.put(68, s68);
-        tunesSoundMap.put(69, s69);
-        tunesSoundMap.put(70, s70);
-        tunesSoundMap.put(71, s71);
-        tunesSoundMap.put(72, s72);
+                tunesSoundMap.put(60, s60);
+                tunesSoundMap.put(61, s61);
+                tunesSoundMap.put(62, s62);
+                tunesSoundMap.put(63, s63);
+                tunesSoundMap.put(64, s64);
+                tunesSoundMap.put(65, s65);
+                tunesSoundMap.put(66, s66);
+                tunesSoundMap.put(67, s67);
+                tunesSoundMap.put(68, s68);
+                tunesSoundMap.put(69, s69);
+                tunesSoundMap.put(70, s70);
+                tunesSoundMap.put(71, s71);
+                tunesSoundMap.put(72, s72);
+            }
+        }, 100);
+
+
 
         Button s35Btn = (Button) this.findViewById(R.id.s35_btn);
         Button s37Btn = (Button) this.findViewById(R.id.s37_btn);
@@ -434,6 +452,10 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         SysApplication.getInstance().addActivity(this);
+
+        // 保持屏幕常亮
+        powerManager = (PowerManager) this.getSystemService(Activity.POWER_SERVICE);
+        wakeLock = this.powerManager.newWakeLock(PowerManager.FULL_WAKE_LOCK, "My Lock");
     }
 
     @Override
@@ -516,5 +538,17 @@ public class MainActivity extends Activity {
             }
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        wakeLock.acquire();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        wakeLock.release();
     }
 }
