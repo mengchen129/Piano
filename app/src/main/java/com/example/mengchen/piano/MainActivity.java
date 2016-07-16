@@ -4,7 +4,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
+import android.media.Image;
 import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.Handler;
@@ -14,9 +17,14 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
+
+import com.example.mengchen.piano.utils.RecordInfo;
+import com.example.mengchen.piano.utils.RecordInfoUtils;
+import com.example.mengchen.piano.utils.SysApplication;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -113,6 +121,7 @@ public class MainActivity extends Activity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                final int s34 = soundPool.load(context, R.raw.s34, 1);     // 5
                 final int s35 = soundPool.load(context, R.raw.s35, 1);     // 5
                 final int s36 = soundPool.load(context, R.raw.s36, 1);
                 final int s37 = soundPool.load(context, R.raw.s37, 1);
@@ -154,8 +163,10 @@ public class MainActivity extends Activity {
                 final int s70 = soundPool.load(context, R.raw.s70, 1);
                 final int s71 = soundPool.load(context, R.raw.s71, 1);
                 final int s72 = soundPool.load(context, R.raw.s72, 1);
+                final int s73 = soundPool.load(context, R.raw.s73, 1);
 
 
+                tunesSoundMap.put(34, s34);
                 tunesSoundMap.put(35, s35);
                 tunesSoundMap.put(36, s36);
                 tunesSoundMap.put(37, s37);
@@ -197,40 +208,65 @@ public class MainActivity extends Activity {
                 tunesSoundMap.put(70, s70);
                 tunesSoundMap.put(71, s71);
                 tunesSoundMap.put(72, s72);
+                tunesSoundMap.put(73, s73);
             }
         }, 100);
 
 
 
-        Button s35Btn = (Button) this.findViewById(R.id.s35_btn);
-        Button s37Btn = (Button) this.findViewById(R.id.s37_btn);
-        Button s39Btn = (Button) this.findViewById(R.id.s39_btn);
+        ImageView s34Btn = (ImageView) this.findViewById(R.id.s34_btn);
+        ImageView s35Btn = (ImageView) this.findViewById(R.id.s35_btn);
+        ImageView s36Btn = (ImageView) this.findViewById(R.id.s36_btn);
+        ImageView s37Btn = (ImageView) this.findViewById(R.id.s37_btn);
+        ImageView s38Btn = (ImageView) this.findViewById(R.id.s38_btn);
+        ImageView s39Btn = (ImageView) this.findViewById(R.id.s39_btn);
+        ImageView s40Btn = (ImageView) this.findViewById(R.id.s40_btn);
+        ImageView s41Btn = (ImageView) this.findViewById(R.id.s41_btn);
+        ImageView s42Btn = (ImageView) this.findViewById(R.id.s42_btn);
+        ImageView s43Btn = (ImageView) this.findViewById(R.id.s43_btn);
+        ImageView s44Btn = (ImageView) this.findViewById(R.id.s44_btn);
+        ImageView s45Btn = (ImageView) this.findViewById(R.id.s45_btn);
+        ImageView s46Btn = (ImageView) this.findViewById(R.id.s46_btn);
+        ImageView s47Btn = (ImageView) this.findViewById(R.id.s47_btn);
+        ImageView s48Btn = (ImageView) this.findViewById(R.id.s48_btn);
+        ImageView s49Btn = (ImageView) this.findViewById(R.id.s49_btn);
+        ImageView s50Btn = (ImageView) this.findViewById(R.id.s50_btn);
+        ImageView s51Btn = (ImageView) this.findViewById(R.id.s51_btn);
+        ImageView s52Btn = (ImageView) this.findViewById(R.id.s52_btn);
+        ImageView s53Btn = (ImageView) this.findViewById(R.id.s53_btn);
+        ImageView s54Btn = (ImageView) this.findViewById(R.id.s54_btn);
+        ImageView s55Btn = (ImageView) this.findViewById(R.id.s55_btn);
+        ImageView s56Btn = (ImageView) this.findViewById(R.id.s56_btn);
+        ImageView s57Btn = (ImageView) this.findViewById(R.id.s57_btn);
+        ImageView s58Btn = (ImageView) this.findViewById(R.id.s58_btn);
+        ImageView s59Btn = (ImageView) this.findViewById(R.id.s59_btn);
+        ImageView s60Btn = (ImageView) this.findViewById(R.id.s60_btn);
+        ImageView s61Btn = (ImageView) this.findViewById(R.id.s61_btn);
+        ImageView s62Btn = (ImageView) this.findViewById(R.id.s62_btn);
 
-        Button s40Btn = (Button) this.findViewById(R.id.s40_btn);
-        Button s42Btn = (Button) this.findViewById(R.id.s42_btn);
-        Button s44Btn = (Button) this.findViewById(R.id.s44_btn);
-        Button s45Btn = (Button) this.findViewById(R.id.s45_btn);
-        Button s47Btn = (Button) this.findViewById(R.id.s47_btn);
-        Button s49Btn = (Button) this.findViewById(R.id.s49_btn);
-        Button s51Btn = (Button) this.findViewById(R.id.s51_btn);
-
-        Button s52Btn = (Button) this.findViewById(R.id.s52_btn);
-        Button s54Btn = (Button) this.findViewById(R.id.s54_btn);
-        Button s56Btn = (Button) this.findViewById(R.id.s56_btn);
-        Button s57Btn = (Button) this.findViewById(R.id.s57_btn);
-        Button s59Btn = (Button) this.findViewById(R.id.s59_btn);
-        Button s61Btn = (Button) this.findViewById(R.id.s61_btn);
-
-//        s40Btn.setBackground(drawable);
-
+        s34Btn.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                return playSound(34, motionEvent, view);
+            }
+        });
         s35Btn.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 return playSound(35, motionEvent, view);
             }
         });
+        s36Btn.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                return playSound(36, motionEvent, view);
+            }
+        });
         s37Btn.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 return playSound(37, motionEvent, view);
+            }
+        });
+        s38Btn.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                return playSound(38, motionEvent, view);
             }
         });
         s39Btn.setOnTouchListener(new View.OnTouchListener() {
@@ -243,9 +279,19 @@ public class MainActivity extends Activity {
                 return playSound(40, motionEvent, view);
             }
         });
+        s41Btn.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                return playSound(41, motionEvent, view);
+            }
+        });
         s42Btn.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 return playSound(42, motionEvent, view);
+            }
+        });
+        s43Btn.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                return playSound(43, motionEvent, view);
             }
         });
         s44Btn.setOnTouchListener(new View.OnTouchListener() {
@@ -258,14 +304,29 @@ public class MainActivity extends Activity {
                 return playSound(45, motionEvent, view);
             }
         });
+        s46Btn.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                return playSound(46, motionEvent, view);
+            }
+        });
         s47Btn.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 return playSound(47, motionEvent, view);
             }
         });
+        s48Btn.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                return playSound(48, motionEvent, view);
+            }
+        });
         s49Btn.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 return playSound(49, motionEvent, view);
+            }
+        });
+        s50Btn.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                return playSound(50, motionEvent, view);
             }
         });
         s51Btn.setOnTouchListener(new View.OnTouchListener() {
@@ -278,9 +339,19 @@ public class MainActivity extends Activity {
                 return playSound(52, motionEvent, view);
             }
         });
+        s53Btn.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                return playSound(53, motionEvent, view);
+            }
+        });
         s54Btn.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 return playSound(54, motionEvent, view);
+            }
+        });
+        s55Btn.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                return playSound(55, motionEvent, view);
             }
         });
         s56Btn.setOnTouchListener(new View.OnTouchListener() {
@@ -293,14 +364,29 @@ public class MainActivity extends Activity {
                 return playSound(57, motionEvent, view);
             }
         });
+        s58Btn.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                return playSound(58, motionEvent, view);
+            }
+        });
         s59Btn.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 return playSound(59, motionEvent, view);
             }
         });
+        s60Btn.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                return playSound(60, motionEvent, view);
+            }
+        });
         s61Btn.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 return playSound(61, motionEvent, view);
+            }
+        });
+        s62Btn.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                return playSound(62, motionEvent, view);
             }
         });
 
@@ -336,22 +422,33 @@ public class MainActivity extends Activity {
             @Override
             public void handleMessage(Message msg) {
                 if (msg.what == 1) {
-                    final Button btn;
+                    final ImageView btn;
 
                     if (msg.obj != null) {
-                        btn = (Button) msg.obj;
+                        btn = (ImageView) msg.obj;
                     } else {
                         int tunes = msg.arg1;
-                        btn = (Button) findViewById(getResources().getIdentifier("s" + tunes + "_btn", "id", "com.example.mengchen.piano"));
+                        btn = (ImageView) findViewById(getResources().getIdentifier("s" + tunes + "_btn", "id", "com.example.mengchen.piano"));
                     }
 
-                    btn.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.btnColorActive)));
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            btn.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.btnColorDefault)));
-                        }
-                    }, 300);
+                    if ("B".equals(btn.getTag())) {
+                        btn.setBackground(getResources().getDrawable(R.drawable.black_key_pressed));
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                btn.setBackground(getResources().getDrawable(R.drawable.black_key_style));
+                            }
+                        }, 300);
+                    } else {
+                        btn.setBackground(getResources().getDrawable(R.drawable.white_key_pressed));
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                btn.setBackground(getResources().getDrawable(R.drawable.white_key_style));
+                            }
+                        }, 300);
+                    }
+
                 } else if (msg.what == 2) {
                     isPlaying = false;
                     playBtn.setText("播放");

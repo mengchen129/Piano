@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
+import com.example.mengchen.piano.utils.SysApplication;
+
 public class HelloActivity extends Activity {
 
     @Override
