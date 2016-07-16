@@ -3,11 +3,7 @@ package com.example.mengchen.piano;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.ColorStateList;
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
-import android.media.Image;
 import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.Handler;
@@ -68,6 +64,9 @@ public class MainActivity extends Activity {
     // 录音时可录制的最小间隔时间（毫秒）
     public static final int RECORD_INTERVAL = 25;
 
+    // 音调切换时，存储到录音数据的最小值 (用于区分按键音)
+    private static final int TUNE_VAL_STARTED = 1000;
+
     // key: 时间戳  value: 音调值
     private Map<Long, List<RecordInfo>> timeTunesMap = new HashMap<>();
 
@@ -107,6 +106,13 @@ public class MainActivity extends Activity {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 tunesAdd = tunesDiffMap.get(i);
+                if (isRecording) {
+                    long timestamp = (System.currentTimeMillis() - recordStartTime) / RECORD_INTERVAL;
+                    RecordInfo recordInfo = new RecordInfo(TUNE_VAL_STARTED + tunesAdd, null);
+                    List<RecordInfo> recordInfoList = new ArrayList<>();
+                    recordInfoList.add(recordInfo);
+                    timeTunesMap.put(timestamp, recordInfoList);
+                }
             }
         });
 
@@ -453,6 +459,11 @@ public class MainActivity extends Activity {
                     isPlaying = false;
                     playBtn.setText("播放");
                     Toast.makeText(MainActivity.this, "播放结束", Toast.LENGTH_SHORT).show();
+                } else if (msg.what == 3) {         // 音调切换
+                    int tunesAdd = msg.arg1;
+                    RadioButton tuneRadio = (RadioButton) findViewById(getResources().getIdentifier("t" + tunesAdd + "_btn", "id", "com.example.mengchen.piano"));
+                    tuneRadio.performClick();
+                    Toast.makeText(MainActivity.this, "音调切换为 " + tuneRadio.getText(), Toast.LENGTH_SHORT).show();
                 }
             }
         };
@@ -492,12 +503,20 @@ public class MainActivity extends Activity {
                                 }
 
                                 for (RecordInfo recordInfo : recordInfoList) {
-                                    playSound(recordInfo.getTunes(), null, null);
-                                    Message message = new Message();
-                                    message.what = 1;
-                                    message.arg1 = recordInfo.getTunes();
-                                    message.obj = recordInfo.getButton();
-                                    handler.sendMessage(message);
+                                    int tunes = recordInfo.getTunes();
+                                    if (tunes < TUNE_VAL_STARTED) {
+                                        playSound(recordInfo.getTunes(), null, null);
+                                        Message message = new Message();
+                                        message.what = 1;
+                                        message.arg1 = recordInfo.getTunes();
+                                        message.obj = recordInfo.getButton();
+                                        handler.sendMessage(message);
+                                    } else {
+                                        Message message = new Message();
+                                        message.what = 3;
+                                        message.arg1 = tunes - TUNE_VAL_STARTED;
+                                        handler.sendMessage(message);
+                                    }
                                 }
                             }
                         }
