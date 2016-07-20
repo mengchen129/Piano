@@ -176,6 +176,44 @@
                         android:layout_height="match_parent"
                         android:background="@drawable/white_key_style"
                         android:clickable="true"
+                        android:id="@+id/s32_btn"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:text="3"
+                        android:layout_gravity="bottom"
+                        android:textAlignment="center"/>
+                </FrameLayout>
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/white_key_style"
+                        android:clickable="true"
+                        android:id="@+id/s33_btn"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:text="4"
+                        android:layout_gravity="bottom"
+                        android:textAlignment="center"/>
+                </FrameLayout>
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/white_key_style"
+                        android:clickable="true"
                         android:id="@+id/s35_btn"
                         />
                     <TextView
@@ -501,6 +539,48 @@
                         android:layout_gravity="bottom"
                         android:textAlignment="center"/>
                 </FrameLayout>
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/white_key_style"
+                        android:clickable="true"
+                        android:id="@+id/s63_btn"
+
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="7"
+                        android:layout_marginBottom="5dp"
+                        android:padding="0dp"
+                        android:layout_gravity="bottom"
+                        android:textAlignment="center"/>
+                </FrameLayout>
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/white_key_style"
+                        android:clickable="true"
+                        android:id="@+id/s64_btn"
+
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:layout_marginBottom="5dp"
+                        android:padding="0dp"
+                        android:layout_gravity="bottom"
+                        android:textAlignment="center"/>
+                </FrameLayout>
 
             </LinearLayout>
 
@@ -508,6 +588,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+                <ImageView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="@drawable/black_key_style"
+                    android:clickable="true"
+                    android:id="@+id/s31_btn"
+                    android:tag="B"
+
+                    />
+                <ImageView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="@drawable/black_key_style"
+                    android:clickable="true"
+                    android:tag="B"
+
+                    />
                 <ImageView
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
@@ -669,8 +766,23 @@
                     android:clickable="true"
                     android:id="@+id/s62_btn"
                     android:tag="B"
+                    />
+                <ImageView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="@drawable/black_key_style"
+                    android:clickable="true"
+                    android:tag="B"
 
 
+                    />
+                <ImageView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="@drawable/black_key_style"
+                    android:clickable="true"
+                    android:id="@+id/s65_btn"
+                    android:tag="B"
                     />
             </com.example.mengchen.piano.utils.BlackLayout>
         </FrameLayout>

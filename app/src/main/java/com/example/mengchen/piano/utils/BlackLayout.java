@@ -13,13 +13,13 @@ public class BlackLayout extends ViewGroup {
     @Override
     protected void onLayout(boolean arg0, int arg1, int arg2, int arg3, int arg4) {
         int screenWidth = this.getWidth();
-        double whiteKeyWidth = screenWidth / 16.0;
+        double whiteKeyWidth = screenWidth / 20.0;
         double childWidth = whiteKeyWidth / 3 * 2;
         int childCount = this.getChildCount();
         for (int i = 0; i < childCount; i++) {
             View child = this.getChildAt(i);
 
-            if (i == 3 || i == 6 || i == 10 || i == 13) {
+            if (i == 1 || i == 5 || i == 8 || i == 12 || i == 15 || i == 19) {
                 child.setVisibility(INVISIBLE);
             }
 

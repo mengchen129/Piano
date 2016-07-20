@@ -127,6 +127,9 @@ public class MainActivity extends Activity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                final int s31 = soundPool.load(context, R.raw.s31, 1);     // 5
+                final int s32 = soundPool.load(context, R.raw.s32, 1);     // 5
+                final int s33 = soundPool.load(context, R.raw.s33, 1);     // 5
                 final int s34 = soundPool.load(context, R.raw.s34, 1);     // 5
                 final int s35 = soundPool.load(context, R.raw.s35, 1);     // 5
                 final int s36 = soundPool.load(context, R.raw.s36, 1);
@@ -170,8 +173,14 @@ public class MainActivity extends Activity {
                 final int s71 = soundPool.load(context, R.raw.s71, 1);
                 final int s72 = soundPool.load(context, R.raw.s72, 1);
                 final int s73 = soundPool.load(context, R.raw.s73, 1);
+                final int s74 = soundPool.load(context, R.raw.s74, 1);
+                final int s75 = soundPool.load(context, R.raw.s75, 1);
+                final int s76 = soundPool.load(context, R.raw.s76, 1);
 
 
+                tunesSoundMap.put(31, s31);
+                tunesSoundMap.put(32, s32);
+                tunesSoundMap.put(33, s33);
                 tunesSoundMap.put(34, s34);
                 tunesSoundMap.put(35, s35);
                 tunesSoundMap.put(36, s36);
@@ -215,11 +224,17 @@ public class MainActivity extends Activity {
                 tunesSoundMap.put(71, s71);
                 tunesSoundMap.put(72, s72);
                 tunesSoundMap.put(73, s73);
+                tunesSoundMap.put(74, s74);
+                tunesSoundMap.put(75, s75);
+                tunesSoundMap.put(76, s76);
             }
         }, 100);
 
 
 
+        ImageView s31Btn = (ImageView) this.findViewById(R.id.s31_btn);
+        ImageView s32Btn = (ImageView) this.findViewById(R.id.s32_btn);
+        ImageView s33Btn = (ImageView) this.findViewById(R.id.s33_btn);
         ImageView s34Btn = (ImageView) this.findViewById(R.id.s34_btn);
         ImageView s35Btn = (ImageView) this.findViewById(R.id.s35_btn);
         ImageView s36Btn = (ImageView) this.findViewById(R.id.s36_btn);
@@ -249,7 +264,25 @@ public class MainActivity extends Activity {
         ImageView s60Btn = (ImageView) this.findViewById(R.id.s60_btn);
         ImageView s61Btn = (ImageView) this.findViewById(R.id.s61_btn);
         ImageView s62Btn = (ImageView) this.findViewById(R.id.s62_btn);
+        ImageView s63Btn = (ImageView) this.findViewById(R.id.s63_btn);
+        ImageView s64Btn = (ImageView) this.findViewById(R.id.s64_btn);
+        ImageView s65Btn = (ImageView) this.findViewById(R.id.s65_btn);
 
+        s31Btn.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                return playSound(31, motionEvent, view);
+            }
+        });
+        s32Btn.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                return playSound(32, motionEvent, view);
+            }
+        });
+        s33Btn.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                return playSound(33, motionEvent, view);
+            }
+        });
         s34Btn.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 return playSound(34, motionEvent, view);
@@ -393,6 +426,21 @@ public class MainActivity extends Activity {
         s62Btn.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 return playSound(62, motionEvent, view);
+            }
+        });
+        s63Btn.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                return playSound(63, motionEvent, view);
+            }
+        });
+        s64Btn.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                return playSound(64, motionEvent, view);
+            }
+        });
+        s65Btn.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                return playSound(65, motionEvent, view);
             }
         });
 
